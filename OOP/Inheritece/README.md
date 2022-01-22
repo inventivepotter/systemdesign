@@ -1,9 +1,7 @@
 # Inheritence
-Inheriting the properties of the superclass into the base class and is one of the most important concepts in Object-Oriented Programming. 
+Inheriting the properties of the super object into the base object and is one of the most important concepts in Object-Oriented Programming. 
 
-In Golang inheritence can achieved by using composition where the struct is used to form other objects. 
-
-Given there are no classes, you can say there is No Inheritance Concept in Golang.
+In Golang inheritence can achieved by using composition where the struct is used to form other objects (composition) or by inheriting interface. 
 
 In composition, base structs can be embedded into a child struct and the methods of the base struct can be directly called on the child struct as shown in the following example.
 

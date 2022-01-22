@@ -1,4 +1,4 @@
-package main
+package inheritence
 
 import (
 	"fmt"
@@ -7,14 +7,14 @@ import (
 
 // Base struct
 type Vehicle struct {
-	tyres int
+	tires int
 	seats int
 	name  string
 }
 
 // Base struct method inherited by all compositions
 func (v *Vehicle) Usage() {
-	fmt.Println("This vehicle has " + sc.Itoa(v.tyres) + " tyres, can accommodate " + sc.Itoa(v.seats) + " people and called as " + v.name)
+	fmt.Println("This vehicle has " + sc.Itoa(v.tires) + " tires, can accommodate " + sc.Itoa(v.seats) + " people and called as " + v.name)
 }
 
 // Car extends Vehicle
@@ -38,7 +38,7 @@ type Auto struct {
 func main() {
 	c := Car{
 		Vehicle{
-			tyres: 4,
+			tires: 4,
 			seats: 5,
 			name:  "Car",
 		},
@@ -46,7 +46,7 @@ func main() {
 	c.Usage()
 	a := Auto{
 		Vehicle{
-			tyres: 3,
+			tires: 3,
 			seats: 3,
 			name:  "Auto",
 		},
@@ -54,7 +54,7 @@ func main() {
 	a.Usage()
 	m := Motercycle{
 		Vehicle{
-			tyres: 2,
+			tires: 2,
 			seats: 2,
 			name:  "Motercylce",
 		},
