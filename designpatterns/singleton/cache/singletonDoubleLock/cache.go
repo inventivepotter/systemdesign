@@ -1,5 +1,8 @@
 package main
 
+// Inspired by - https://www.saylorsolutions.com/singleton-pattern-in-golang/ and
+//Inspired by - https://www.saylorsolutions.com/singleton-pattern-in-golang/
+
 import (
 	"fmt"
 	"strconv"
@@ -12,6 +15,7 @@ type cache struct {
 }
 
 var Cache *cache
+var mutex = sync.Mutex{}
 
 func (c *cache) insert(key string, value int) {
 	c.mutex.Lock()
@@ -35,32 +39,33 @@ func (c *cache) print() {
 	c.mutex.Unlock()
 }
 
-func GetInstance(m *sync.Mutex) *cache {
+func GetInstance() *cache {
 	// Double Lock Signleton Implementation
 	if Cache == nil {
-		m.Lock()
+		mutex.Lock()
+		defer mutex.Unlock()
 		if Cache == nil {
 			Cache = &cache{
 				data:  map[string]int{},
-				mutex: m,
+				mutex: &mutex,
 			}
 		}
-		m.Unlock()
 	}
 	return Cache
 }
 
 func main() {
 	wg := sync.WaitGroup{}
-	mutex := sync.Mutex{}
 	for i := 0; i < 10; i++ {
 		wg.Add(1)
 		go func(i int) {
-			cacheinstance := GetInstance(&mutex)
+			cacheinstance := GetInstance()
 			cacheinstance.insert("key"+strconv.Itoa(i), i)
 			cacheinstance.print()
 			wg.Done()
 		}(i)
 	}
 	wg.Wait()
+	cacheinstance := GetInstance()
+	fmt.Println(cacheinstance.get("key2"))
 }
