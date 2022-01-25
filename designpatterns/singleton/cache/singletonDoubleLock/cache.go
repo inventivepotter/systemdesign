@@ -49,7 +49,12 @@ func GetInstance() *cache {
 				data:  map[string]int{},
 				mutex: &mutex,
 			}
+			fmt.Println("cache created")
+		} else {
+			fmt.Println("Cache used")
 		}
+	} else {
+		fmt.Println("Cache used")
 	}
 	return Cache
 }
