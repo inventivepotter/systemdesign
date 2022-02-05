@@ -11,8 +11,8 @@ func (s Song) Play() {
 	fmt.Println(s.name + " is playing")
 }
 
-func (s *Song) Reference() Playable {
-	return s
+func (s *Song) Reference() (Playable, error) {
+	return s, nil
 }
 
 func CreateSong(name string) Song {

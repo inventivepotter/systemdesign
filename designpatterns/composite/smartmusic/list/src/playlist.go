@@ -1,5 +1,7 @@
 package smartmusic
 
+import "fmt"
+
 //Playlist implements Playable
 type Playlist struct {
 	name  string
@@ -12,13 +14,16 @@ func (p Playlist) Play() {
 	}
 }
 
-func (p *Playlist) Reference() Playable {
-	return p
+func (p *Playlist) Reference() (Playable, error) {
+	return p, nil
 }
 
 func (p *Playlist) Add(pl Playable) {
-	tada := pl.Reference()
-	p.items = append(p.items, &tada)
+	item, err := pl.Reference()
+	if err != nil {
+		fmt.Println(err)
+	}
+	p.items = append(p.items, &item)
 }
 
 func CreatePlaylist(name string) Playlist {
